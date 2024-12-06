@@ -1,3 +1,5 @@
+print("js working")
+
 const messages = {
   'Chat 1': [],
   'Chat 2': [],
