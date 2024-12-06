@@ -23,7 +23,7 @@ function renderMessages() {
   if (currentChat) {
     messages[currentChat].forEach(msg => {
       const messageDiv = document.createElement('div');
-      messageDiv.className = message ${msg.sent ? 'sent' : 'received'};
+      messageDiv.className = `message ${msg.sent ? 'sent' : 'received'}`;
       const bubble = document.createElement('div');
       bubble.className = 'bubble';
       bubble.innerText = msg.text;
