@@ -27,7 +27,9 @@
         <!-- Messages will be dynamically added here -->
       </div>
       <div class="chat-input">
-        <input type="text" id="message-input" placeholder="Type a message..." />
+        <textarea id="message-input" 
+            placeholder="Type a message..." 
+            onkeydown="handleKeyDown(event)"></textarea>
         <button onclick="sendMessage()">Send</button>
       </div>
     </div>
