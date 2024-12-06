@@ -5,7 +5,7 @@ const messages = {
 };
 
 let currentChat = null;
-const API_URL = "https://brainy-cyndie-infinitymagicstudios-2635fc96.koyeb.app/";  // Your AI API URL
+const API_URL = "https://brainy-cyndie-infinitymagicstudios-2635fc96.koyeb.app/chat";  // API endpoint updated to /chat
 
 // Function to select a chat
 function selectChat(chatName) {
@@ -88,12 +88,12 @@ async function simulateAIResponse(userMessage) {
 
     const responseData = await response.json();
     
-    // Assuming the response has a 'text' field for the AI's reply
-    if (responseData && responseData.text) {
-      messages[currentChat].push({ text: responseData.text, sent: false });
+    // Assuming the response has a 'response' field for the AI's reply
+    if (responseData && responseData.response) {
+      messages[currentChat].push({ text: responseData.response, sent: false });
       renderMessages();
     } else {
-      console.error("Error: AI response did not contain text.");
+      console.error("Error: AI response did not contain the 'response' field.");
     }
   } catch (error) {
     console.error("Error calling the AI API:", error);
