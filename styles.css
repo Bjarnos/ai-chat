@@ -124,3 +124,38 @@ body {
 .chat-input button:hover {
   background-color: #2980b9;
 }
+
+.sidebar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.sidebar-actions button {
+  padding: 8px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sidebar-actions button:hover {
+  background-color: #2980b9;
+}
+
+.credit-btn {
+  margin-top: auto;
+  padding: 10px;
+  background-color: #34495e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.credit-btn:hover {
+  background-color: #1abc9c;
+}
