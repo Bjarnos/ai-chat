@@ -87,6 +87,7 @@ async function simulateAIResponse(userMessage) {
     });
 
     const responseData = await response.json();
+    console.log("API Response Data:", responseData);
     
     // Assuming the response has a 'response' field for the AI's reply
     if (responseData && responseData.response) {
