@@ -1,2 +1,2 @@
--> Head [here](https://bjarnos.github.io/ai-chat/) to use the ai chat.
-  enjoy ;)
+-> Head [here](https://bjarnos.github.io/ai-chat/) to use the ai chat. \n
+  Enjoy ;)
