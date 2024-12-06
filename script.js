@@ -39,6 +39,14 @@ function sendMessage() {
   }
 }
 
+function handleKeyDown(event) {
+  const input = document.getElementById('message-input');
+  if (event.key === 'Enter' && !event.shiftKey) {
+    event.preventDefault(); // Prevent adding a newline
+    sendMessage();
+  }
+}
+
 function simulateAIResponse() {
   setTimeout(() => {
     if (currentChat) {
