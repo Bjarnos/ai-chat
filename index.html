@@ -8,7 +8,6 @@
 </head>
 <body>
   <div class="chat-container">
-    <!-- Sidebar for Chat Threads -->
     <div class="chat-sidebar">
       <h3>Chats</h3>
       <ul id="chat-list">
@@ -16,9 +15,14 @@
         <li onclick="selectChat('Chat 2')">Chat 2</li>
         <li onclick="selectChat('Chat 3')">Chat 3</li>
       </ul>
+      <div class="sidebar-actions">
+        <button onclick="addChat()">Add Chat</button>
+        <button onclick="renameChat()">Rename Chat</button>
+        <button onclick="deleteChat()">Delete Chat</button>
+      </div>
+      <button class="google-btn" onclick="redirectToGoogle()">Go to Google</button>
     </div>
     
-    <!-- Chat Area -->
     <div class="chat-main">
       <div class="chat-header" id="chat-header">
         Select a Chat
