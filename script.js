@@ -81,6 +81,7 @@ async function simulateAIResponse(userMessage) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*', // Add CORS header here
       },
       body: JSON.stringify(requestPayload),
     });
