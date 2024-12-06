@@ -55,3 +55,7 @@ function simulateAIResponse() {
     }
   }, 1000);
 }
+
+window.onload = function() {
+  selectChat('Chat 1');
+};
