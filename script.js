@@ -93,6 +93,6 @@ function deleteChat() {
 }
 
 // Redirect to Google
-function redirectToGoogle() {
+function creditButton() {
   window.location.href = 'https://google.com';
 }
