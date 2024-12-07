@@ -146,7 +146,8 @@ async function simulateAIResponse(userMessage) {
   }
 }
 
-// Automatically set the default chat to "Chat 1" when the page loads
+// Page load functions
 window.onload = function() {
   selectChat('Chat 1');
+  initializeChatButtons();
 };
