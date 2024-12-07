@@ -28,15 +28,24 @@ function initializeChatButtons() {
   });
 }
 
-// Show the popup menu
+// Function to show the popup
 function showPopupMenu(chatName, button) {
-  // Check if a popup is already displayed and remove it
-  const existingPopup = document.querySelector('.popup-menu');
+  // Check if a popup is already displayed
+  let existingPopup = document.querySelector('.popup-menu');
+  
+  // If the popup is already open for the same button, close it
+  if (existingPopup && existingPopup.dataset.chatName === chatName) {
+    existingPopup.remove();
+    return;
+  }
+
+  // Remove any other open popup
   if (existingPopup) existingPopup.remove();
 
   // Create the popup menu
   const popup = document.createElement('ul');
   popup.className = 'popup-menu';
+  popup.dataset.chatName = chatName; // Store chatName to identify the source
   popup.innerHTML = `
     <li>Option 1 for ${chatName}</li>
     <li>Option 2 for ${chatName}</li>
@@ -52,11 +61,24 @@ function showPopupMenu(chatName, button) {
   document.body.appendChild(popup);
 
   // Close the popup when clicking elsewhere
-  document.addEventListener('click', (event) => {
+  const closePopup = (event) => {
     if (!popup.contains(event.target) && event.target !== button) {
       popup.remove();
+      document.removeEventListener('click', closePopup);
     }
-  }, { once: true });
+  };
+
+  // Add the event listener to close the popup
+  document.addEventListener('click', closePopup);
+
+  // Close the popup when clicking a menu option
+  popup.querySelectorAll('li').forEach((item) => {
+    item.addEventListener('click', () => {
+      console.log(`${item.innerText} clicked!`);
+      popup.remove();
+      document.removeEventListener('click', closePopup);
+    });
+  });
 }
 
 // Function to render messages in the chat
