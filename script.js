@@ -17,7 +17,8 @@ function selectChat(chatId) {
 }
 
 // Modify chat buttons
-function initializeChatButton(chat, openButton) {
+function initializeChatButton(chat) {
+  const openButton = document.createElement('button');
   openButton.innerText = 'Open';
   openButton.className = 'open-btn';
   openButton.onclick = () => showPopupMenu(chat.innerText, openButton);
@@ -29,8 +30,7 @@ function initializeChatButtons() {
   const chats = chatList.querySelectorAll('li');
 
   chats.forEach(chat => {
-    const openButton = document.createElement('button');
-    initializeChatButton(chat, openButton);
+    initializeChatButton(chat);
   });
 }
 
@@ -95,6 +95,20 @@ function renderMessages() {
       chatMessages.appendChild(messageDiv);
     });
   }
+}
+
+function addChat() {
+  const num = String(Object.keys(messages).length);
+  messages[num] = [];
+  aliases[num] = "New Chat";
+
+  const chatList = document.getElementById('chat-list');
+  const newChatItem = document.createElement('li');
+  newChatItem.innerText = aliases[num];
+  newChatItem.setAttribute('onclick', `selectChat('${num}')`);
+  chatList.append(newChatItem);
+  
+  initializeChatButton(newChatItem);
 }
 
 // Function to send a message
