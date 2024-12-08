@@ -1,5 +1,5 @@
 const messages = {
-  'First chat': [],
+  '1': [],
 };
 
 let currentChat = null;
