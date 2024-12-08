@@ -11,6 +11,7 @@ const API_URL = "https://brainy-cyndie-infinitymagicstudios-2635fc96.koyeb.app/c
 
 // Function to select a chat
 function selectChat(chatId) {
+  console.log(chatId)
   currentChat = chatId;
   document.getElementById('chat-header').innerText = aliases[chatId];
   renderMessages();
