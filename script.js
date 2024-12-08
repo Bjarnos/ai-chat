@@ -185,6 +185,6 @@ async function simulateAIResponse(userMessage) {
 
 // Page load functions
 window.onload = function() {
-  selectChat('1');
+  selectChat('0');
   initializeChatButtons();
 };
