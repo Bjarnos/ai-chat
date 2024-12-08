@@ -2,27 +2,35 @@ const messages = {
   '1': [],
 };
 
+const aliases = {
+  '1': "First chat",
+};
+
 let currentChat = null;
 const API_URL = "https://brainy-cyndie-infinitymagicstudios-2635fc96.koyeb.app/chat";
 
 // Function to select a chat
-function selectChat(chatName) {
-  currentChat = chatName;
-  document.getElementById('chat-header').innerText = chatName;
+function selectChat(chatId) {
+  currentChat = chatId;
+  document.getElementById('chat-header').innerText = aliases[chatId];
   renderMessages();
 }
 
 // Modify chat buttons
+function initializeChatButton(chat, openButton) {
+  openButton.innerText = 'Open';
+  openButton.className = 'open-btn';
+  openButton.onclick = () => showPopupMenu(chat.innerText, openButton);
+  chat.appendChild(openButton);
+}
+
 function initializeChatButtons() {
   const chatList = document.getElementById('chat-list');
   const chats = chatList.querySelectorAll('li');
 
   chats.forEach(chat => {
     const openButton = document.createElement('button');
-    openButton.innerText = 'Open';
-    openButton.className = 'open-btn';
-    openButton.onclick = () => showPopupMenu(chat.innerText, openButton);
-    chat.appendChild(openButton);
+    initializeChatButton(chat, openButton);
   });
 }
 
@@ -40,7 +48,7 @@ function showPopupMenu(chatName, button) {
   popup.className = 'popup-menu';
   popup.dataset.chatName = chatName;
   popup.innerHTML = `
-    <li>Rename "${chatName}"</li>
+    <li>Rename Chat</li>
     <li>Delete chat</li>
   `;
 
@@ -65,7 +73,7 @@ function showPopupMenu(chatName, button) {
 
   popup.querySelectorAll('li').forEach((item) => {
     item.addEventListener('click', () => {
-      console.log(`${item.innerText} clicked!`);
+      console.log(`"${item.innerText}" clicked!`);
       popup.remove();
       document.removeEventListener('click', closePopup);
     });
