@@ -1,9 +1,9 @@
 const messages = {
-  '1': [],
+  '0': [],
 };
 
 const aliases = {
-  '1': "First chat",
+  '0': "First chat",
 };
 
 let currentChat = null;
