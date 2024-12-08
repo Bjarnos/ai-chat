@@ -1,11 +1,9 @@
 const messages = {
-  'Chat 1': [],
-  'Chat 2': [],
-  'Chat 3': []
+  'First chat': [],
 };
 
 let currentChat = null;
-const API_URL = "https://brainy-cyndie-infinitymagicstudios-2635fc96.koyeb.app/chat";  // API endpoint updated to /chat
+const API_URL = "https://brainy-cyndie-infinitymagicstudios-2635fc96.koyeb.app/chat";
 
 // Function to select a chat
 function selectChat(chatName) {
@@ -30,37 +28,32 @@ function initializeChatButtons() {
 
 // Function to show the popup
 function showPopupMenu(chatName, button) {
-  // Check if a popup is already displayed
   let existingPopup = document.querySelector('.popup-menu');
-  
-  // If the popup is already open for the same button, close it
   if (existingPopup && existingPopup.dataset.chatName === chatName) {
     existingPopup.remove();
     return;
   }
 
-  // Remove any other open popup
   if (existingPopup) existingPopup.remove();
 
-  // Create the popup menu
   const popup = document.createElement('ul');
   popup.className = 'popup-menu';
-  popup.dataset.chatName = chatName; // Store chatName to identify the source
+  popup.dataset.chatName = chatName;
   popup.innerHTML = `
-    <li>Option 1 for ${chatName}</li>
-    <li>Option 2 for ${chatName}</li>
-    <li>Option 3 for ${chatName}</li>
+    <li>Rename "${chatName}"</li>
+    <li>Delete chat</li>
   `;
 
-  // Position the popup near the button
+  popup.addEventListener('click', (event) => {
+    event.stopPropagation();
+  });
+  
   const rect = button.getBoundingClientRect();
   popup.style.top = `${rect.bottom + window.scrollY}px`;
   popup.style.left = `${rect.left + window.scrollX}px`;
 
-  // Add the popup to the body
   document.body.appendChild(popup);
 
-  // Close the popup when clicking elsewhere
   const closePopup = (event) => {
     if (!popup.contains(event.target) && event.target !== button) {
       popup.remove();
@@ -68,10 +61,8 @@ function showPopupMenu(chatName, button) {
     }
   };
 
-  // Add the event listener to close the popup
   document.addEventListener('click', closePopup);
 
-  // Close the popup when clicking a menu option
   popup.querySelectorAll('li').forEach((item) => {
     item.addEventListener('click', () => {
       console.log(`${item.innerText} clicked!`);
