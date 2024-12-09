@@ -63,11 +63,7 @@ function popup(message) {
 
 // Function to get id by alias
 function getIdFromAlias(alias){
-  for (const key in aliases) {
-    if (aliases[key] === alias) {
-      return key
-    }
-  }
+  return Object.keys(aliases).find(key => aliases[key] === alias);
 }
 
 // Function to select a chat
