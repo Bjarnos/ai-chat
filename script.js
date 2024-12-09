@@ -167,8 +167,13 @@ function renameChat(element) {
   element.replaceWith(input);
   input.focus();
 
-  input.addEventListener('blur', () => {
-    const newName = input.value.trim() || originalElement.firstChild.nodeValue.trim();
+  input.addEventListener('blur', () => {    
+    const newName = input.value.trim() || currentName;
+    if (getIdFromAlias(newName)) {
+      newName = currentName;
+      popup("A chat with this name already exists!");
+    }
+    
     const updatedElement = document.createElement('li');
     updatedElement.textContent = newName;
     updatedElement.className = 'chat-name';
@@ -185,6 +190,11 @@ function renameChat(element) {
   input.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
       const newName = input.value.trim() || originalElement.firstChild.nodeValue.trim();
+      if (getIdFromAlias(newName)) {
+        newName = currentName;
+        popup("A chat with this name already exists!");
+      }
+      
       const updatedElement = document.createElement('li');
       updatedElement.textContent = newName;
       updatedElement.className = 'chat-name';
@@ -218,10 +228,15 @@ function renderMessages() {
 }
 
 // Function to add a chat
+let chatnum = 0
 function addChat() {
+  do {
+    chatnum++;
+  } while (!getIdFromAlias(`New Chat #${chatnum}`));
+  
   const num = String(Object.keys(messages).length);
   messages[num] = [];
-  aliases[num] = "New Chat";
+  aliases[num] = `New Chat #${chatnum}`;
 
   const chatList = document.getElementById('chat-list');
   const newChatItem = document.createElement('li');
