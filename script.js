@@ -245,8 +245,9 @@ function addChat() {
 // Function to delete a chat
 function deleteChat(chatButton) {
   if (Object.keys(messages).length < 2) {
-    popup("You can't have less than 1 chat!")
-    return
+    console.log(messages);
+    popup("You can't have less than 1 chat!");
+    return;
   }
   
   const chatId = getIdFromAlias(chatButton.firstChild.nodeValue.trim());
