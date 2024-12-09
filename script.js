@@ -61,6 +61,15 @@ function popup(message) {
   document.body.appendChild(overlay);
 }
 
+// Function to get id by alias
+function getIdFromAlias(alias){
+  for (const key in aliases) {
+    if (aliases[key] === alias) {
+      return key
+    }
+  }
+}
+
 // Function to select a chat
 function selectChat(chatId) {
   currentChat = chatId;
@@ -164,12 +173,9 @@ function renameChat(element) {
     input.replaceWith(updatedElement);
     initializeChatButton(updatedElement);
 
-    for (const key in aliases) {
-      if (aliases[key] === currentName) {
-        aliases[key] = newName;
-        selectChat(key);
-      }
-    }
+    const key = getKeyFromAlias(currentName);
+    aliases[key] = newName;
+    selectChat(key);
   });
 
   input.addEventListener('keydown', (event) => {
@@ -183,12 +189,9 @@ function renameChat(element) {
       input.replaceWith(updatedElement);
       initializeChatButton(updatedElement);
 
-      for (const key in aliases) {
-        if (aliases[key] === currentName) {
-          aliases[key] = newName;
-          selectChat(key);
-        }
-      }
+      const key = getKeyFromAlias(currentName);
+      aliases[key] = newName;
+      selectChat(key);
     }
   });
 }
@@ -210,6 +213,7 @@ function renderMessages() {
   }
 }
 
+// Function to add a chat
 function addChat() {
   const num = String(Object.keys(messages).length);
   messages[num] = [];
@@ -222,6 +226,16 @@ function addChat() {
   chatList.append(newChatItem);
   
   initializeChatButton(newChatItem);
+}
+
+// Function to delete a chat
+function deleteChat(chatId) {
+  delete messages[chatId];
+  document.getElementById('chat-list').querySelectorAll('li').forEach((item) => {
+    if (item.firstChild.nodeValue.trim() === chatId) {
+      //d
+    }
+  });
 }
 
 // Function to send a message
