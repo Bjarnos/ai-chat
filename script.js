@@ -232,7 +232,7 @@ let chatnum = 0
 function addChat() {
   do {
     chatnum++;
-  } while (!getIdFromAlias(`New Chat #${chatnum}`));
+  } while (getIdFromAlias(`New Chat #${chatnum}`));
   
   const num = String(Object.keys(messages).length);
   messages[num] = [];
