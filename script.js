@@ -143,7 +143,6 @@ function showPopupMenu(chatName, button) {
           }
         });
       }
-      console.log(`"${item.innerText}" clicked!`);
       popup.remove();
       document.removeEventListener('click', closePopup);
     });
