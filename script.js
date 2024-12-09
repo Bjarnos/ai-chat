@@ -22,6 +22,10 @@ function initializeChatButton(chat) {
   openButton.innerText = 'Open';
   openButton.className = 'open-btn';
   openButton.onclick = () => showPopupMenu(chat.innerText, openButton);
+
+  openButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+  });
   chat.appendChild(openButton);
 }
 
@@ -52,9 +56,7 @@ function showPopupMenu(chatName, button) {
     <li>Delete chat</li>
   `;
 
-  popup.addEventListener('click', (event) => {
-    event.stopPropagation();
-  });
+  // heree
   
   const rect = button.getBoundingClientRect();
   popup.style.top = `${rect.bottom + window.scrollY}px`;
