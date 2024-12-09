@@ -235,6 +235,7 @@ function addChat() {
 // Function to delete a chat
 function deleteChat(chatButton) {
   delete messages[chatId];
+  delete aliases[chatId];
   chatButton.remove();
 }
 
