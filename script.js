@@ -53,10 +53,8 @@ function showPopupMenu(chatName, button) {
   popup.dataset.chatName = chatName;
   popup.innerHTML = `
     <li>Rename Chat</li>
-    <li>Delete chat</li>
+    <li>Delete Chat</li>
   `;
-
-  // heree
   
   const rect = button.getBoundingClientRect();
   popup.style.top = `${rect.bottom + window.scrollY}px`;
@@ -75,11 +73,51 @@ function showPopupMenu(chatName, button) {
 
   popup.querySelectorAll('li').forEach((item) => {
     item.addEventListener('click', () => {
+      if (item.innerText === "Rename Chat") {
+        document.querySelectorAll('li').forEach((item2) => {
+          if (item2.innerText === popup.dataset.chatName) {
+            renameChat(item2)
+          }
+        }
+      } else if (item.innerText === "Delete Chat") {
+        // idk
+      }
       console.log(`"${item.innerText}" clicked!`);
       popup.remove();
       document.removeEventListener('click', closePopup);
     });
   });
+}
+
+// Function to rename chats
+function renameChat(element) {
+  const currentName = element.textContent;
+
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.value = currentName;
+  input.className = 'rename-input';
+
+  element.replaceWith(input);
+  input.focus();
+
+  input.addEventListener('blur', () => finishRename(input, element));
+
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      finishRename(input, element);
+    }
+  });
+}
+
+function finishRename(input, originalElement) {
+  const newName = input.value.trim() || originalElement.textContent;
+  const updatedElement = document.createElement('p');
+  updatedElement.textContent = newName;
+  updatedElement.className = 'chat-name';
+  updatedElement.setAttribute('onclick', 'enableRename(this)');
+
+  input.replaceWith(updatedElement);
 }
 
 // Function to render messages in the chat
