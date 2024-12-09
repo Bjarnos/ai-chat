@@ -30,6 +30,8 @@ function popup(message) {
   popupContainer.style.borderRadius = '10px';
   popupContainer.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
   popupContainer.style.zIndex = '10000';
+  popupContainer.style.alignItems = 'center';
+  popupContainer.style.justifyContent = 'center';
 
   const messageText = document.createElement('p');
   messageText.innerText = message;
