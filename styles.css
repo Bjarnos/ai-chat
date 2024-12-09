@@ -45,6 +45,18 @@ body {
   transition: background-color 0.3s;
 }
 
+.chat-sidebar ul li:hover {
+  background-color: #1abc9c;
+}
+
+.chat-sidebar ul input {
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #34495e;
+  border-radius: 5px;
+  text-align: center;
+}
+
 .chat-buttons {
   padding: 10px;
   margin: 5px 0;
@@ -53,10 +65,6 @@ body {
   border-radius: 5px;
   text-align: center;
   transition: background-color 0.3s;
-}
-
-.chat-sidebar ul li:hover {
-  background-color: #1abc9c;
 }
 
 .chat-main {
