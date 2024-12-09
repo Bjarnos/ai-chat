@@ -72,22 +72,22 @@ function showPopupMenu(chatName, button) {
   document.addEventListener('click', closePopup);
 
   popup.querySelectorAll('li').forEach((item) => {
-  item.addEventListener('click', () => {
-    if (item.innerText === "Rename Chat") {
-      document.querySelectorAll('li').forEach((item2) => {
-        if (item2.innerText === popup.dataset.chatName) {
-          renameChat(item2);
-        }
-      });
-    } else if (item.innerText === "Delete Chat") {
-      // Placeholder for delete chat logic
-    }
-    console.log(`"${item.innerText}" clicked!`);
-    popup.remove();
-    document.removeEventListener('click', closePopup);
+    item.addEventListener('click', () => {
+      if (item.innerText === "Rename Chat") {
+        document.querySelectorAll('li').forEach((item2) => {
+          if (item2.innerText === popup.dataset.chatName) {
+            renameChat(item2);
+          }
+        });
+      } else if (item.innerText === "Delete Chat") {
+        // Placeholder for delete chat logic
+      }
+      console.log(`"${item.innerText}" clicked!`);
+      popup.remove();
+      document.removeEventListener('click', closePopup);
+    });
   });
-});
-
+}
 
 // Function to rename chats
 function renameChat(element) {
