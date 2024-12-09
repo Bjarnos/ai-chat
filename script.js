@@ -80,7 +80,7 @@ function showPopupMenu(chatName, button) {
         }
       });
     } else if (item.innerText === "Delete Chat") {
-      // idk
+      // Placeholder for delete chat logic
     }
     console.log(`"${item.innerText}" clicked!`);
     popup.remove();
