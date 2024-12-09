@@ -154,7 +154,23 @@ function renameChat(element) {
   element.replaceWith(input);
   input.focus();
 
-  input.addEventListener('blur', () => finishRename(input, element));
+  input.addEventListener('blur', () => {
+    const newName = input.value.trim() || originalElement.firstChild.nodeValue.trim();
+    const updatedElement = document.createElement('li');
+    updatedElement.textContent = newName;
+    updatedElement.className = 'chat-name';
+    updatedElement.setAttribute('onclick', savedFunction);
+
+    input.replaceWith(updatedElement);
+    initializeChatButton(updatedElement);
+
+    for (const key in aliases) {
+      if (aliases[key] === currentName) {
+        aliases[key] = newName;
+        selectChat(key);
+      }
+    }
+  });
 
   input.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
