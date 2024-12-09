@@ -250,6 +250,10 @@ function deleteChat(chatButton) {
   }
   
   const chatId = getIdFromAlias(chatButton.firstChild.nodeValue.trim());
+  if (chatId === currentChat) {
+    selectChat(Object.keys(messages)[0]);
+  }
+  
   delete messages[chatId];
   delete aliases[chatId];
   chatButton.remove();
