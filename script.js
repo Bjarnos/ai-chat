@@ -51,7 +51,7 @@ function popup(message) {
   okButton.style.cursor = 'pointer';
 
   okButton.addEventListener('click', () => {
-    localStorage.setItem("accepted", true)
+    localStorage.setItem("accepted", 'true')
     document.body.removeChild(overlay);
   });
   
@@ -255,7 +255,7 @@ async function simulateAIResponse(userMessage) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*', // Add CORS header here
+        'Access-Control-Allow-Origin': '*',
       },
       body: JSON.stringify(requestPayload),
     });
@@ -263,7 +263,6 @@ async function simulateAIResponse(userMessage) {
     const responseData = await response.json();
     console.log("API Response Data:", responseData);
     
-    // Assuming the response has a 'response' field for the AI's reply
     if (responseData && responseData.response) {
       messages[currentChat].push({ text: responseData.response, sent: false });
       renderMessages();
@@ -277,8 +276,8 @@ async function simulateAIResponse(userMessage) {
 
 // Page load functions
 window.onload = function() {
-  if (localStorage.getItem("accepted") !== true) {
-     popup("Welcome to ai-chat! Please note that your conversations aren't heavily secured and might be read by hackers. NEVER share sensitive info or passwords!");
+  if (localStorage.getItem("accepted") !== 'true') {
+     popup("Welcome to ai-chat! Please note that your conversations aren't heavily secured and might be read by hackers. NEVER share sensitive info or passwords! Enjoy :)");
   }
   selectChat('0');
   initializeChatButtons();
