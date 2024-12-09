@@ -11,15 +11,17 @@ const API_URL = "https://brainy-cyndie-infinitymagicstudios-2635fc96.koyeb.app/c
 
 // Popup function
 function popup(message) {
+  // Create the dark overlay
   const overlay = document.createElement('div');
   overlay.style.position = 'fixed';
   overlay.style.top = '0';
   overlay.style.left = '0';
   overlay.style.width = '100%';
   overlay.style.height = '100%';
-  overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-  overlay.style.zIndex = '9999';
+  overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'; // Semi-transparent black
+  overlay.style.zIndex = '9999'; // Ensure it's on top of other elements
 
+  // Create the popup container
   const popupContainer = document.createElement('div');
   popupContainer.style.position = 'fixed';
   popupContainer.style.top = '50%';
@@ -29,16 +31,20 @@ function popup(message) {
   popupContainer.style.padding = '20px';
   popupContainer.style.borderRadius = '10px';
   popupContainer.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
-  popupContainer.style.zIndex = '10000';
-  popupContainer.style.alignItems = 'center';
-  popupContainer.style.justifyContent = 'center';
+  popupContainer.style.zIndex = '10000'; // Higher than the overlay
+  popupContainer.style.display = 'flex';
+  popupContainer.style.flexDirection = 'column';
+  popupContainer.style.alignItems = 'center'; // Center align all children (text and button)
+  popupContainer.style.justifyContent = 'center'; // Center content vertically
 
+  // Create the message text
   const messageText = document.createElement('p');
   messageText.innerText = message;
   messageText.style.margin = '0 0 20px 0';
   messageText.style.fontSize = '16px';
   messageText.style.textAlign = 'center';
 
+  // Create the "OK" button
   const okButton = document.createElement('button');
   okButton.innerText = 'OK';
   okButton.style.padding = '10px 20px';
@@ -48,10 +54,12 @@ function popup(message) {
   okButton.style.borderRadius = '5px';
   okButton.style.cursor = 'pointer';
 
+  // Add click event to dismiss the popup
   okButton.addEventListener('click', () => {
     document.body.removeChild(overlay);
   });
 
+  // Append elements
   popupContainer.appendChild(messageText);
   popupContainer.appendChild(okButton);
   overlay.appendChild(popupContainer);
