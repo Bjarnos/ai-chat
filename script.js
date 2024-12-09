@@ -173,7 +173,7 @@ function renameChat(element) {
     input.replaceWith(updatedElement);
     initializeChatButton(updatedElement);
 
-    const key = getKeyFromAlias(currentName);
+    const key = getIdFromAlias(currentName);
     aliases[key] = newName;
     selectChat(key);
   });
@@ -189,7 +189,7 @@ function renameChat(element) {
       input.replaceWith(updatedElement);
       initializeChatButton(updatedElement);
 
-      const key = getKeyFromAlias(currentName);
+      const key = getIdFromAlias(currentName);
       aliases[key] = newName;
       selectChat(key);
     }
