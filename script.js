@@ -91,7 +91,8 @@ function showPopupMenu(chatName, button) {
 
 // Function to rename chats
 function renameChat(element) {
-  const currentName = element.textContent;
+  const currentName = element.firstChild.nodeValue.trim();
+  const savedFunction = element.getAttribute('onclick')
 
   const input = document.createElement('input');
   input.type = 'text';
@@ -105,19 +106,20 @@ function renameChat(element) {
 
   input.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
-      finishRename(input, element);
+      finishRename(input, element, savedFunction);
     }
   });
 }
 
-function finishRename(input, originalElement) {
-  const newName = input.value.trim() || originalElement.textContent;
-  const updatedElement = document.createElement('p');
+function finishRename(input, originalElement, savedFunction) {
+  const newName = input.value.trim() || originalElement.firstChild.nodeValue.trim();
+  const updatedElement = document.createElement('li');
   updatedElement.textContent = newName;
   updatedElement.className = 'chat-name';
-  updatedElement.setAttribute('onclick', 'enableRename(this)');
+  updatedElement.setAttribute('onclick', savedFunction);
 
   input.replaceWith(updatedElement);
+  initializeChatButton(updatedElement);
 }
 
 // Function to render messages in the chat
