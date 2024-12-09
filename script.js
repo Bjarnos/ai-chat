@@ -164,7 +164,7 @@ function renameChat(element) {
   input.focus();
 
   input.addEventListener('blur', () => {    
-    const newName = input.value.trim() || currentName;
+    let newName = input.value.trim() || currentName;
     if (getIdFromAlias(newName)) {
       newName = currentName;
       popup("A chat with this name already exists!");
@@ -185,7 +185,7 @@ function renameChat(element) {
 
   input.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
-      const newName = input.value.trim() || originalElement.firstChild.nodeValue.trim();
+      let newName = input.value.trim() || originalElement.firstChild.nodeValue.trim();
       if (getIdFromAlias(newName)) {
         newName = currentName;
         popup("A chat with this name already exists!");
