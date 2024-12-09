@@ -51,6 +51,7 @@ function popup(message) {
   okButton.style.cursor = 'pointer';
 
   okButton.addEventListener('click', () => {
+    localStorage.setItem("accepted", true)
     document.body.removeChild(overlay);
   });
   
@@ -276,7 +277,9 @@ async function simulateAIResponse(userMessage) {
 
 // Page load functions
 window.onload = function() {
-  popup("Welcome to ai-chat! Please note that your conversations aren't heavily secured and might be read by hackers. NEVER share sensitive info or passwords!");
+  if (localStorage.getItem("accepted") !== true) {
+     popup("Welcome to ai-chat! Please note that your conversations aren't heavily secured and might be read by hackers. NEVER share sensitive info or passwords!");
+  }
   selectChat('0');
   initializeChatButtons();
 };
