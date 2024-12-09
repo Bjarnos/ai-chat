@@ -168,8 +168,8 @@ function renameChat(element) {
       initializeChatButton(updatedElement);
 
       for (const key in aliases) {
-        if (dictionary[key] === currentName) {
-          dictionary[key] = newName;
+        if (aliases[key] === currentName) {
+          aliases[key] = newName;
           selectChat(key);
         }
       }
