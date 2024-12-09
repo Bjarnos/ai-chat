@@ -141,7 +141,11 @@ function showPopupMenu(chatName, button) {
           }
         });
       } else if (item.innerText === "Delete Chat") {
-        // Placeholder for delete chat logic
+        document.querySelectorAll('li').forEach((item2) => {
+          if (item2.innerText === popup.dataset.chatName) {
+            deleteChat(item2);
+          }
+        });
       }
       console.log(`"${item.innerText}" clicked!`);
       popup.remove();
@@ -229,13 +233,9 @@ function addChat() {
 }
 
 // Function to delete a chat
-function deleteChat(chatId) {
+function deleteChat(chatButton) {
   delete messages[chatId];
-  document.getElementById('chat-list').querySelectorAll('li').forEach((item) => {
-    if (item.firstChild.nodeValue.trim() === chatId) {
-      //d
-    }
-  });
+  chatButton.remove();
 }
 
 // Function to send a message
