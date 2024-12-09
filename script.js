@@ -272,7 +272,7 @@ async function simulateAIResponse(userMessage) {
 
 // Page load functions
 window.onload = function() {
-  popup("Welcome to ai-chat! Please note that your conversations aren't heavily secured and might be read by hackers. NEVER share sensitive info or passwords!");
+  popup("Welcome to ai-chat! Please note that your conversations aren't heavily secured and might be read by hackers. <b>NEVER</b> share sensitive info or passwords!");
   selectChat('0');
   initializeChatButtons();
 };
