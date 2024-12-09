@@ -234,6 +234,7 @@ function addChat() {
 
 // Function to delete a chat
 function deleteChat(chatButton) {
+  const chatId = getIdFromAlias(chatButton.firstChild.nodeValue.trim());
   delete messages[chatId];
   delete aliases[chatId];
   chatButton.remove();
