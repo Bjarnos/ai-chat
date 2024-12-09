@@ -9,6 +9,53 @@ const aliases = {
 let currentChat = null;
 const API_URL = "https://brainy-cyndie-infinitymagicstudios-2635fc96.koyeb.app/chat";
 
+// Popup function
+function popup(message) {
+  const overlay = document.createElement('div');
+  overlay.style.position = 'fixed';
+  overlay.style.top = '0';
+  overlay.style.left = '0';
+  overlay.style.width = '100%';
+  overlay.style.height = '100%';
+  overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+  overlay.style.zIndex = '9999';
+
+  const popupContainer = document.createElement('div');
+  popupContainer.style.position = 'fixed';
+  popupContainer.style.top = '50%';
+  popupContainer.style.left = '50%';
+  popupContainer.style.transform = 'translate(-50%, -50%)';
+  popupContainer.style.backgroundColor = 'white';
+  popupContainer.style.padding = '20px';
+  popupContainer.style.borderRadius = '10px';
+  popupContainer.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+  popupContainer.style.zIndex = '10000';
+
+  const messageText = document.createElement('p');
+  messageText.innerText = message;
+  messageText.style.margin = '0 0 20px 0';
+  messageText.style.fontSize = '16px';
+  messageText.style.textAlign = 'center';
+
+  const okButton = document.createElement('button');
+  okButton.innerText = 'OK';
+  okButton.style.padding = '10px 20px';
+  okButton.style.border = 'none';
+  okButton.style.backgroundColor = '#007BFF';
+  okButton.style.color = 'white';
+  okButton.style.borderRadius = '5px';
+  okButton.style.cursor = 'pointer';
+
+  okButton.addEventListener('click', () => {
+    document.body.removeChild(overlay);
+  });
+
+  popupContainer.appendChild(messageText);
+  popupContainer.appendChild(okButton);
+  overlay.appendChild(popupContainer);
+  document.body.appendChild(overlay);
+}
+
 // Function to select a chat
 function selectChat(chatId) {
   currentChat = chatId;
@@ -225,6 +272,7 @@ async function simulateAIResponse(userMessage) {
 
 // Page load functions
 window.onload = function() {
+  popup("Welcome to ai-chat! Please note that your conversations aren't heavily secured and might be read by hackers. NEVER share sensitive info or passwords!");
   selectChat('0');
   initializeChatButtons();
 };
