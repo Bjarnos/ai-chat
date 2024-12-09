@@ -158,20 +158,23 @@ function renameChat(element) {
 
   input.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
-      finishRename(input, element, savedFunction);
+      const newName = input.value.trim() || originalElement.firstChild.nodeValue.trim();
+      const updatedElement = document.createElement('li');
+      updatedElement.textContent = newName;
+      updatedElement.className = 'chat-name';
+      updatedElement.setAttribute('onclick', savedFunction);
+
+      input.replaceWith(updatedElement);
+      initializeChatButton(updatedElement);
+
+      for (const key in aliases) {
+        if (dictionary[key] === currentName) {
+          dictionary[key] = newName;
+          selectChat(key);
+        }
+      }
     }
   });
-}
-
-function finishRename(input, originalElement, savedFunction) {
-  const newName = input.value.trim() || originalElement.firstChild.nodeValue.trim();
-  const updatedElement = document.createElement('li');
-  updatedElement.textContent = newName;
-  updatedElement.className = 'chat-name';
-  updatedElement.setAttribute('onclick', savedFunction);
-
-  input.replaceWith(updatedElement);
-  initializeChatButton(updatedElement);
 }
 
 // Function to render messages in the chat
