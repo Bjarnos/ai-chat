@@ -76,7 +76,7 @@ function selectChat(chatId) {
 // Modify chat buttons
 function initializeChatButton(chat) {
   const openButton = document.createElement('button');
-  openButton.innerText = 'Open';
+  openButton.innerText = '···';
   openButton.className = 'open-btn';
   openButton.onclick = () => showPopupMenu(chat.innerText, openButton);
 
