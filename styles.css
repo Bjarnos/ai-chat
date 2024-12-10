@@ -149,14 +149,12 @@ body {
 .open-btn {
   margin-left: 10px;
   padding: 5px 10px;
-  background-color: #3498db;
+  background-color: rgba(52, 152, 219, 0);
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 12px;
-  opacity: 0;
-  /*border-opacity: 1;*/
 }
 
 .open-btn:hover {
