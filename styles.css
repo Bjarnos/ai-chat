@@ -155,10 +155,12 @@ body {
   border-radius: 5px;
   cursor: pointer;
   font-size: 12px;
+  transition: color 0.3s;
 }
 
 .open-btn:hover {
-  background-color: #28465A;
+  /*background-color: #28465A;*/
+  color: black;
 }
 
 .popup-menu {
