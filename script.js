@@ -78,6 +78,7 @@ function initializeChatButton(chat) {
   const openButton = document.createElement('button');
   openButton.innerText = '···';
   openButton.className = 'open-btn';
+  openButton.style.fontWeight = 'bold';
   openButton.onclick = () => showPopupMenu(chat.innerText, openButton);
 
   openButton.addEventListener('click', (event) => {
