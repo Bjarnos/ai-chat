@@ -1,9 +1,12 @@
-const messages = {
-  '0': [],
-};
+// 0 is the preset chat
+const messages = { '0': [] };
+const aliases = { '0': "First chat" };
+const prompts = { '0': "You are an AI assistant. Answer concisely and helpfully." };
 
-const aliases = {
-  '0': "First chat",
+const presetModels = {
+  "Default": "You are an AI assistant. Answer concisely and helpfully.",
+  "Friendly AI": "You are a friendly AI. Provide answers with a warm and casual tone.",
+  "Professional AI": "You are a professional assistant. Respond formally and accurately.",
 };
 
 let currentChat = null;
@@ -241,6 +244,7 @@ function addChat() {
   chatList.append(newChatItem);
   
   initializeChatButton(newChatItem);
+  setChatPrompt(num);
 }
 
 // Function to delete a chat
@@ -282,6 +286,78 @@ function handleKeyDown(event) {
   }
 }
 
+// Function to set a system prompt for a chat
+function setChatPrompt(chatId) {
+  const overlay = document.createElement('div');
+  overlay.style.position = 'fixed';
+  overlay.style.top = '0';
+  overlay.style.left = '0';
+  overlay.style.width = '100%';
+  overlay.style.height = '100%';
+  overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+  overlay.style.zIndex = '9999';
+
+  const popupContainer = document.createElement('div');
+  popupContainer.style.position = 'fixed';
+  popupContainer.style.top = '50%';
+  popupContainer.style.left = '50%';
+  popupContainer.style.transform = 'translate(-50%, -50%)';
+  popupContainer.style.backgroundColor = 'white';
+  popupContainer.style.padding = '20px';
+  popupContainer.style.borderRadius = '10px';
+  popupContainer.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+  popupContainer.style.zIndex = '10000';
+  popupContainer.style.display = 'flex';
+  popupContainer.style.flexDirection = 'column';
+  popupContainer.style.alignItems = 'center';
+  popupContainer.style.justifyContent = 'center';
+
+  const title = document.createElement('h3');
+  title.innerText = 'Set System Prompt';
+  title.style.marginBottom = '10px';
+  popupContainer.appendChild(title);
+
+  const modelDropdown = document.createElement('select');
+  modelDropdown.style.marginBottom = '10px';
+  modelDropdown.style.padding = '10px';
+  modelDropdown.style.width = '100%';
+  for (const model in presetModels) {
+    const option = document.createElement('option');
+    option.value = presetModels[model];
+    option.innerText = model;
+    modelDropdown.appendChild(option);
+  }
+  popupContainer.appendChild(modelDropdown);
+
+  const customPromptInput = document.createElement('textarea');
+  customPromptInput.placeholder = "Or enter a custom system prompt here...";
+  customPromptInput.style.width = '100%';
+  customPromptInput.style.height = '60px';
+  customPromptInput.style.marginBottom = '10px';
+  customPromptInput.style.padding = '10px';
+  popupContainer.appendChild(customPromptInput);
+
+  const saveButton = document.createElement('button');
+  saveButton.innerText = 'Save Prompt';
+  saveButton.style.padding = '10px 20px';
+  saveButton.style.backgroundColor = '#007BFF';
+  saveButton.style.color = 'white';
+  saveButton.style.border = 'none';
+  saveButton.style.borderRadius = '5px';
+  saveButton.style.cursor = 'pointer';
+  popupContainer.appendChild(saveButton);
+
+  saveButton.addEventListener('click', () => {
+    const selectedPrompt = customPromptInput.value.trim() || modelDropdown.value;
+    prompts[chatId] = selectedPrompt;
+    document.body.removeChild(overlay);
+    renderMessages();
+  });
+
+  overlay.appendChild(popupContainer);
+  document.body.appendChild(overlay);
+}
+
 // Function to simulate AI response by making an HTTP request
 async function simulateAIResponse(userMessage) {
   const chatHistory = messages[currentChat];
@@ -293,7 +369,7 @@ async function simulateAIResponse(userMessage) {
   // Prepare the system message and user messages to send to the AI
   const systemMessage = {
     role: "system",
-    content: "You are an AI assistant. Answer concisely and helpfully."
+    content: prompts[currentChat] || "You are an AI assistant. Answer concisely and helpfully."
   };
 
   const userMessages = historyToSend.map(msg => ({
